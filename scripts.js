@@ -9,7 +9,7 @@ const selectSize = () => {
 }
 
 const buildBoard = (inputSize) => {
-
+    console.log(inputSize);
     column: for (i = 0; i < inputSize; i++) {
         const columnDiv = document.createElement('div');
         columnDiv.setAttribute('id', `Column:${i}`);
@@ -25,17 +25,33 @@ const buildBoard = (inputSize) => {
 }
 
 
-buildBoard(selectSize());
-
-
-const gridDiv = document.querySelectorAll('.gridDiv');
-
-for (i = 0; i < gridDiv.length; i++) {
-    let colorGrid = gridDiv[i]
-    colorGrid.addEventListener('mouseover', (e) => {
-        colorGrid.classList.add('colored');
-    });
+const addMouseoverEvent = () => {
+    const gridDiv = document.querySelectorAll('.gridDiv');
+    for (i = 0; i < gridDiv.length; i++) {
+        let colorGrid = gridDiv[i]
+        colorGrid.addEventListener('mouseover', (e) => {
+            colorGrid.classList.add('colored');
+        });
     
+    }
+}
+
+
+
+const newBoard = document.querySelector(`#newBoard`);
+newBoard.addEventListener('click', () => {
+    removeChildren();
+    buildBoard(selectSize());
+    addMouseoverEvent();
+    
+})
+
+
+
+let removeChildren = () => {
+    while (gameContainer.firstChild) {
+    gameContainer.removeChild(gameContainer.firstChild);
+    }
 }
 
 
